@@ -1,0 +1,9 @@
+= simple_form_for @survey_result, :html => { :class => 'form-horizontal' } do |f|
+|   = f.input :mobile
+|   = f.input :liberty
+|   = f.input :sexy
+|   = f.input :wigs_wired
+| |   .form-actions
+    = f.button :submit, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), survey_results_path, :class => 'btn'
+| 

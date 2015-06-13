@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150613214059) do
+ActiveRecord::Schema.define(version: 20150613223445) do
+
+  create_table "signers", force: :cascade do |t|
+    t.string   "mobile"
+    t.string   "name"
+    t.string   "town"
+    t.boolean  "signed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "survey_results", force: :cascade do |t|
+    t.string   "mobile"
+    t.string   "liberty"
+    t.string   "sexy"
+    t.string   "wigs_wired"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +38,14 @@ ActiveRecord::Schema.define(version: 20150613214059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "role"
+  end
+
+  create_table "volunteers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "twitter_handle"
+    t.string   "mobile"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end
