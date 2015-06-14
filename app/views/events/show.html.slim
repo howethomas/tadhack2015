@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Mobile:
+  = @event.mobile
+p
+  strong Name:
+  = @event.name
+p
+  strong Can bring:
+  = @event.can_bring
+
+= link_to 'Edit', edit_event_path(@event)
+'|
+= link_to 'Back', events_path

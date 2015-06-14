@@ -1,5 +1,6 @@
 class SurveyResultsController < ApplicationController
   before_action :set_survey_result, only: [:show, :edit, :update, :destroy]
+  skip_before_filter  :verify_authenticity_token
 
   # GET /survey_results
   # GET /survey_results.json
@@ -24,15 +25,19 @@ class SurveyResultsController < ApplicationController
   # POST /survey_results
   # POST /survey_results.json
   def create
-    @survey_result = SurveyResult.new(survey_result_params)
-
+    collected_data = JSON.parse params["collected_data"]
+    new_survey_params = {
+      liberty: collected_data["DATA_PROMPT_1"],
+      sexy: collected_data["DATA_PROMPT_2"],
+      mobile: collected_data["SRC"],
+      wigs_wired: collected_data["DATA_PROMPT_3"]
+    }
+    @survey_result = SurveyResult.new(new_survey_params)
     respond_to do |format|
       if @survey_result.save
-        format.html { redirect_to @survey_result, notice: 'Survey result was successfully created.' }
-        format.json { render :show, status: :created, location: @survey_result }
+        render :nothing => true
       else
-        format.html { render :new }
-        format.json { render json: @survey_result.errors, status: :unprocessable_entity }
+        render json: @survey_result.errors, status: :unprocessable_entity
       end
     end
   end

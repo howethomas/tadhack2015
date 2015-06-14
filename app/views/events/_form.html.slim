@@ -1,0 +1,10 @@
+= simple_form_for(@event) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :mobile
+    = f.input :name
+    = f.input :can_bring
+
+  .form-actions
+    = f.button :submit

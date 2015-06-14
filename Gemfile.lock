@@ -222,6 +222,7 @@ DEPENDENCIES
   hub
   jbuilder (~> 2.0)
   jquery-rails
+  json
   omniauth
   omniauth-twitter
   pg

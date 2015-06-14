@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mobile: MyString
+  name: MyString
+  can_bring: MyString
+
+two:
+  mobile: MyString
+  name: MyString
+  can_bring: MyString

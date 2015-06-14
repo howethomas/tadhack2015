@@ -1,5 +1,7 @@
 class VolunteersController < ApplicationController
   before_action :set_volunteer, only: [:show, :edit, :update, :destroy]
+  skip_before_filter  :verify_authenticity_token
+
 
   # GET /volunteers
   # GET /volunteers.json
@@ -24,16 +26,24 @@ class VolunteersController < ApplicationController
   # POST /volunteers
   # POST /volunteers.json
   def create
-    @volunteer = Volunteer.new(volunteer_params)
-
-    respond_to do |format|
-      if @volunteer.save
-        format.html { redirect_to @volunteer, notice: 'Volunteer was successfully created.' }
-        format.json { render :show, status: :created, location: @volunteer }
-      else
-        format.html { render :new }
-        format.json { render json: @volunteer.errors, status: :unprocessable_entity }
+    collected_data = JSON.parse params["collected_data"]
+    if collected_data["confirmed"]
+      new_volunteer_params = {
+        name: collected_data["name"],
+        twitter_handle: collected_data["other_contact"],
+        mobile: collected_data["SRC"],
+        note: collected_data["note"]
+      }
+      @volunteer = Volunteer.new(new_volunteer_params)
+      respond_to do |format|
+        if @volunteer.save
+          render :nothing => true
+        else
+          render json: @volunteer.errors, status: :unprocessable_entity
+        end
       end
+    else
+      render :nothing => true
     end
   end
 

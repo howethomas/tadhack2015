@@ -1,11 +1,10 @@
 <%# add navigation links to this file %>
+<li><%= link_to 'Volunteers', volunteers_path %></li>
+<li><%= link_to 'Events', events_path %></li>
+<li><%= link_to 'Petition Signers', signers_path %></li>
+<li><%= link_to 'Survey Results', survey_results_path %></li>
 <% if user_signed_in? %>
   <li><%= link_to 'Sign out', signout_path %></li>
 <% else %>
   <li><%= link_to 'Sign in', signin_path %></li>
-<% end %>
-<% if user_signed_in? %>
-  <% if current_user.try(:admin?) %>
-    <li><%= link_to 'Users', users_path %></li>
-  <% end %>
 <% end %>

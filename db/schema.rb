@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150613223445) do
+ActiveRecord::Schema.define(version: 20150614001940) do
+
+  create_table "events", force: :cascade do |t|
+    t.string   "mobile"
+    t.string   "name"
+    t.string   "can_bring"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "signers", force: :cascade do |t|
     t.string   "mobile"
@@ -46,6 +54,7 @@ ActiveRecord::Schema.define(version: 20150613223445) do
     t.string   "mobile"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "note"
   end
 
 end

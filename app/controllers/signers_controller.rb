@@ -1,5 +1,6 @@
 class SignersController < ApplicationController
   before_action :set_signer, only: [:show, :edit, :update, :destroy]
+  skip_before_filter  :verify_authenticity_token
 
   # GET /signers
   # GET /signers.json
@@ -24,15 +25,19 @@ class SignersController < ApplicationController
   # POST /signers
   # POST /signers.json
   def create
-    @signer = Signer.new(signer_params)
-
+    collected_data = JSON.parse params["collected_data"]
+    new_signer_params = {
+      name: collected_data["name"],
+      town: collected_data["DATA_PROMPT_1"],
+      mobile: collected_data["SRC"],
+      signed: collected_data["ANSWER"]
+    }
+    @signer = Signer.new(new_signer_params)
     respond_to do |format|
       if @signer.save
-        format.html { redirect_to @signer, notice: 'Signer was successfully created.' }
-        format.json { render :show, status: :created, location: @signer }
+        render :nothing => true
       else
-        format.html { render :new }
-        format.json { render json: @signer.errors, status: :unprocessable_entity }
+        render json: @signer.errors, status: :unprocessable_entity
       end
     end
   end

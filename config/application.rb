@@ -23,5 +23,8 @@ module Tadhack2015
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.assets.precompile += %w( flatly.css )
+
+    config.web_console.whitelisted_ips = '104.131.53.14'
+
   end
 end
